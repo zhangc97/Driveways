@@ -1,0 +1,63 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font:15px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+.main-container, #app {
+  height:100%;
+  width:100%;
+}
+.title {
+  margin-right: 20px;
+}
+
+.home-container {
+  flex-direction: row;
+  display:flex;
+  height: 92%;
+
+}
+.mapboxgl-ctrl-geocoder { min-width:100%; }
+.info-container{
+  padding: 3px;
+  width: 30%;
+}
+
+.avatar-img {
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  background: #f9f7f3;
+}
+
+.nav-bar {
+  height: 7%;
+  background: #666784;
+  align-items: center;
+  color:#fff;
+  padding: 5px;
+  display:flex;;
+  justify-content:space-between;
+  flex: 1 0 10px;
+
+}
+
+.footer-bar {
+  background: #666784;
+  flex-direction: column;
+  display:flex;
+  color:#fff;
+  padding: 5px;
+  display:flex;
+  height: 15%;
+  justify-content:space-between;
+  flex: 1 0 10px;
+  text-align: center;
+}

@@ -8,13 +8,22 @@
   },
   "babel": {
     "presets": [
-      "env",
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": "last 1 Firefox versions"
+          }
+        }
+      ],
       "react"
     ]
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "react-router-dom": "^4.2.2"
+  },
   "devDependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
@@ -24,8 +33,15 @@
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "img-loader": "^3.0.0",
+    "mapbox-gl": "^0.45.0",
+    "mapbox-gl-geocoder": "^2.0.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-geocoder": "^2.5.0",
+    "react-map-gl": "^3.2.7",
+    "react-mapbox-gl": "^3.8.0",
+    "url-loader": "^1.0.1",
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
