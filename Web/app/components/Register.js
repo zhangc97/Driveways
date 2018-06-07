@@ -1,12 +1,9 @@
-import React from 'react'
-import avatar from './images/stock.png'
+import React from 'react';
 import Modal from 'react-modal';
-import SignInPage from './BaseLoginPage'
-
-const MODAL_A = 'modal_a';
+import SignUp from './Signup';
 
 
-class Credentials extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isOpen : false};
@@ -24,9 +21,8 @@ class Credentials extends React.Component {
   render() {
     const {isOpen} = this.state
     return (
-      /*<img className = 'avatar-img' src = {avatar} alt = 'Avatar' />*/
       <div className = 'login-modal'>
-        <button className = '' onClick = {this.toggleModal}>Sign In</button>
+        <button className = '' onClick = {this.toggleModal}>Register</button>
         <Modal
           style={{overlay: {zIndex: 1000},
                   display: 'flex',
@@ -40,14 +36,13 @@ class Credentials extends React.Component {
           aria = {{
             labelledby: "heading",
             describedby: "fulldescription"
-          }}
-          >
-          <SignInPage />
-          </Modal>
+          }}>
+          <SignUp />
 
-      </div>
+
+          </Modal>
+        </div>
     )
   }
 }
-
-export default Credentials;
+export default Register;

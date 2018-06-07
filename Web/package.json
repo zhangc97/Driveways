@@ -16,19 +16,31 @@
           }
         }
       ],
-      "react"
+      "react",
+      [
+        "es2016"
+      ]
+    ],
+    "plugins": [
+      "babel-plugin-transform-class-properties"
     ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react-router-dom": "^4.2.2"
+    "firebase": "^5.0.4",
+    "react-modal": "^3.4.5",
+    "react-router-dom": "^4.2.2",
+    "recompose": "^0.27.1",
+    "redux": "^4.0.0"
   },
   "devDependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2016": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
@@ -41,6 +53,7 @@
     "react-geocoder": "^2.5.0",
     "react-map-gl": "^3.2.7",
     "react-mapbox-gl": "^3.8.0",
+    "react-redux": "^5.0.7",
     "url-loader": "^1.0.1",
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4",

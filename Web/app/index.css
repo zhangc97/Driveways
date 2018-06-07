@@ -11,14 +11,28 @@ body {
 .title {
   margin-right: 20px;
 }
-
+.login-modal{
+  position: 'absolute';
+  z-index: 1000;
+}
+.account-container {
+  display:flex;
+  flex-direction: row;
+}
 .home-container {
   flex-direction: row;
   display:flex;
   height: 92%;
 
 }
+.sign-in-container {
+  display:flex;
+  flex-direction: column;
+}
 .mapboxgl-ctrl-geocoder { min-width:100%; }
+
+
+
 .info-container{
   padding: 3px;
   width: 30%;

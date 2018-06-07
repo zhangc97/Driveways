@@ -33,13 +33,12 @@ class MapDisplay extends React.Component {
     const style = {
       height: "100%",
       width: "75vw",
-      zIndex: '1',
     };
     const geocoderStyle = {
         position: 'absolute',
-        zindex:'1',
         width: '50%',
-        padding: '1%'
+        padding: '1%',
+        zIndex: '5',
 
     };
 
