@@ -18,8 +18,30 @@ class MapDisplay extends React.Component {
     });
     //this.map.addControl(geocoder);
     var object = this.refs.geocoder;
-    object.appendChild(geocoder.onAdd(this.map))
+    object.appendChild(geocoder.onAdd(this.map));
+    this.map.on('load', () => {
+      var map = this.map;
+      this.map.addSource('single-point', {
+        "type" : "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features" : []
+        }
+      });
 
+      this.map.addLayer({
+        "id": "point",
+        "source": "single-point",
+        "type" : "circle",
+        "paint" : {
+          "circle-radius" : 10,
+          "circle-color": "#007cbf"
+        }
+      });
+      geocoder.on('result', function (ev) {
+        map.getSource('single-point').setData(ev.result.geometry);
+      })
+    })
   }
 
   componentWillUnmount() {
