@@ -17,7 +17,6 @@ class Credentials extends React.Component {
     Modal.setAppElement('body')
   }
   toggleModal = event => {
-    console.log(event);
     const { isOpen } = this.state;
     this.setState({ isOpen: !isOpen });
   }
@@ -42,7 +41,7 @@ class Credentials extends React.Component {
             describedby: "fulldescription"
           }}
           >
-          <SignInPage />
+            <SignInPage />
           </Modal>
 
       </div>

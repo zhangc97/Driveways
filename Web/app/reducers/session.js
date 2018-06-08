@@ -3,7 +3,7 @@ const INITIAL_STATE = {
 };
 
 const applySetAuthUser = (state,action) => ({
-  ...state,
+  state,
   authUser: action.authUser
 });
 

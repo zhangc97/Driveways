@@ -3,7 +3,7 @@ const INITIAL_STATE = {
 };
 //User reducers for list of users in database
 const applySetUsers = (state, action) => ({
-  ...state,
+  state,
   users: action.users
 })
 

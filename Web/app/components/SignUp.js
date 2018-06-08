@@ -76,23 +76,23 @@ class SignUpForm extends Component {
         />
         <input
           value = {email}
-          onChange = {event => this.setState(byPropKey('username', event.target.value))}
+          onChange = {event => this.setState(byPropKey('email', event.target.value))}
           type = 'text'
           placeholder = 'Email Address'
         />
         <input
           value = {passwordOne}
-          onChange = {event => this.setState(byPropKey('username', event.target.value))}
+          onChange = {event => this.setState(byPropKey('passwordOne', event.target.value))}
           type = 'password'
           placeholder = 'Password'
         />
         <input
           value = {passwordTwo}
-          onChange = {event => this.setState(byPropKey('username', event.target.value))}
+          onChange = {event => this.setState(byPropKey('passwordTwo', event.target.value))}
           type = 'password'
           placeholder = 'Confirm Password'
         />
-        <button disables = {isInvalid} type = 'submit'>
+        <button disabled = {isInvalid} type = 'submit'>
           Register
         </button>
         {error && <p>{error.message}</p>}

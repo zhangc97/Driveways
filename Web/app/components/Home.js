@@ -1,9 +1,12 @@
 import React from 'react'
 import MapDisplay from './Map'
+import { connect } from 'react-redux';
+import { compose } from 'recompose'
+import withAuthorization from './withAuthorization';
 
 class Home extends React.Component {
   render() {
-    return (
+    return(
       <div className = 'home-container'>
           <MapDisplay />
         <div className = 'info-container'>
@@ -14,9 +17,12 @@ class Home extends React.Component {
           Morbi sed urna molestie, consequat velit sed, rutrum eros.
         </div>
       </div>
-
     )
   }
 }
 
+
+//const authCondition = (authUser) => !!authUser;
+
+//export default withAuthorization(authCondition)(Home);
 export default Home;

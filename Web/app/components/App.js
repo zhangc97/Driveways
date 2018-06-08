@@ -5,27 +5,21 @@ import Footer from './Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Modal from 'react-modal'
 import SignUp from './SignUp'
-import SignIn from './SignIn'
-import * as routes from '../constants/routes';
+import * as routes from '../constants/routes'
+import withAuthentication from './withAuthentication'
+import {firebase} from '../firebase'
 
-class App extends React.Component {
-  render() {
-    return (
-      <Router>
-        <div className = 'main-container'>
-          <Nav />
-          <Switch>
-            <Route exact path = '/' component = {Home} />
-            <Route exact path = {routes.SIGN_UP} component = {SignUp}/>
-            <Route exact path = {routes.SIGN_IN} component = {SignIn}/>
-          </Switch>
-          <Footer />
+const App = () => (
+  <Router>
+    <div className = 'main-container'>
+      <Nav />
 
-        </div>
-      </Router>
+      <Route path = {routes.HOME} component = {Home} />
 
-    )
-  }
-}
+      <Footer />
 
-export default App;
+    </div>
+  </Router>
+)
+
+export default withAuthentication(App);

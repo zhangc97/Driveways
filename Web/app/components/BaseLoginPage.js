@@ -3,17 +3,14 @@ import { Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import AuthUserContext from './AuthUserContext';
 import * as routes from '../constants/routes';
-import {auth} from '../firebase/firebase';
+import {auth} from '../firebase';
 
-const SignInPage = ({history}) => (
+const SignInPage = ( {history} ) => (
   <div>
     <h1>SignIn</h1>
     <SignInForm history = {history} />
   </div>
 )
-const nextPath = (path) => {
-    this.props.history.push(path);
-  }
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
 })
@@ -26,20 +23,22 @@ const INITIAL_STATE = {
 class SignInForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {INITIAL_STATE};
+    this.state = {...INITIAL_STATE};
 
   }
   onSubmit = (event) => {
+
     const {
       email,
       password,
     } = this.state;
     const {
-      history,
+      history
     } = this.props;
+
     auth.doSignInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState(() => ({INITIAL_STATE}));
+        this.setState(() => ({...INITIAL_STATE}));
         history.push(routes.HOME);
       })
       .catch(error => {
@@ -71,7 +70,7 @@ class SignInForm extends React.Component {
             type = 'password'
             placeholder = 'Password'
           />
-          <button disables = {isInvalid} type = 'submit'>
+          <button disabled = {isInvalid} type = 'submit'>
             Sign In
           </button>
           { error && <p>{error.message}</p>}

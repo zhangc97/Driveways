@@ -7,29 +7,26 @@ import AuthUserContext from './AuthUserContext';
 import { firebase } from '../firebase';
 import * as routes from '../constants/routes';
 
-const withAuthorization = (authCondition) => (Component) => { //takes an auth condition and component arguement and returns:
+const withAuthorization = (condition) => (Component) => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
       firebase.auth.onAuthStateChanged(authUser => {
-        if(!authCondition(authUser)) {
+        if (!condition(authUser)) {
           this.props.history.push(routes.SIGN_IN);
         }
       });
     }
+
     render() {
       return (
-        this.props.authUser ? <Component /> : null
-      )
+        <AuthUserContext.Consumer>
+          {authUser => authUser ? <Component /> : null}
+        </AuthUserContext.Consumer>
+      );
     }
   }
-  const mapStateToProps = (state) => ({
-    authUser: state.sessionState.authUser,
-  })
-  return compose(
-    withRouter,
-    connect(mapStateToProps),
-  )(WithAuthorization)
 
+  return withRouter(WithAuthorization);
 }
 
 export default withAuthorization;

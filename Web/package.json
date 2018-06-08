@@ -22,13 +22,14 @@
       ]
     ],
     "plugins": [
-      "babel-plugin-transform-class-properties"
+      "babel-plugin-transform-class-properties",
+      "transform-es2015-destructuring",
+      "transform-object-rest-spread"
     ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "firebase": "^5.0.4",
     "react-modal": "^3.4.5",
     "react-router-dom": "^4.2.2",
     "recompose": "^0.27.1",
@@ -44,6 +45,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
+    "firebase": "^5.0.4",
     "html-webpack-plugin": "^3.2.0",
     "img-loader": "^3.0.0",
     "mapbox-gl": "^0.45.0",

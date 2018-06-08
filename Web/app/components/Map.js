@@ -1,7 +1,5 @@
 //Mapbox key : pk.eyJ1IjoiemhhbmdjMTYiLCJhIjoiY2pocXQ4YWpuNGhyNzNkbmd4bmp0NXI3biJ9.YtbhiD-q1KoaRK4uf-9Q6w
 import React from 'react'
-import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl'
-import GeoCoder from 'react-geocoder'
 import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from 'mapbox-gl-geocoder'
 
