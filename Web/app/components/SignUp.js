@@ -37,7 +37,7 @@ class SignUpForm extends Component {
   const { history } = this.props;
   auth.doCreateUserWithEmailAndPassword(email, passwordOne)
     .then(authUser => {
-      db.doCreateUser(authUser.uid, username, email)
+      db.doCreateUser(authUser.user.uid, username, email)
         .then(() => {
           this.setState(() => ({INITIAL_STATE}));
           //redirect route?

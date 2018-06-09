@@ -31,7 +31,12 @@ body {
 }
 .mapboxgl-ctrl-geocoder { min-width:100%; }
 
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
 
+}
 
 .info-container{
   padding: 3px;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import AuthUserContext from './AuthUserContext';
+import AuthUserContext from '../utils/AuthUserContext';
 import * as routes from '../constants/routes';
 import {auth} from '../firebase';
 

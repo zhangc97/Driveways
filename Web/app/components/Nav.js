@@ -2,7 +2,7 @@ import React from 'react'
 import Credentials from './Credentials'
 import Register from './Register'
 import avatar from './images/stock.png';
-import AuthUserContext from './AuthUserContext';
+import AuthUserContext from '../utils/AuthUserContext';
 import { connect } from 'react-redux';
 import SignOut from './SignOutButton'
 
@@ -30,8 +30,6 @@ const NavNonAuthed = () => (
   <div className = 'account-container'>
     <Credentials />
     <Register />
-
-
   </div>
 )
 
