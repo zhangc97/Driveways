@@ -9,12 +9,15 @@ export const doCreateUser = (id, username, email ) => (
   })
 )
 
-export const doAddCoordinateToDatabase = ( id, [coordinates] ) => (
-  db.ref(`users/${id}/listings`).set({
-    coordinates
-  })
-)
+export var doAddCoordinateToDatabase = (function(id, [coordinates]) {
+  var newPostKey = db.ref().child('listings').push().key;
+  var updates = {};
+  updates['/listings/' + newPostKey] = coordinates;
+  updates[`users/${id}/owner/${newPostKey}`] = newPostKey;
+  //add key to users table
+  return db.ref().update(updates);
+})
 
-export const onceGetUsers = () => (
-  db.ref('users').once('value')
+export const onceGetCoords = () => (
+  db.ref('listings').once('value')
 )

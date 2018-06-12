@@ -27,6 +27,12 @@
       "transform-object-rest-spread"
     ]
   },
+  "firebase" : {
+    "rules" : {
+      ".read": true,
+      ".write": true
+    }
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
