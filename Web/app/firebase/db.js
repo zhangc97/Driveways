@@ -9,7 +9,7 @@ export const doCreateUser = (id, username, email ) => (
   })
 )
 
-export var doAddCoordinateToDatabase = (function(id, [coordinates]) {
+export var doAddCoordinateToDatabase = (function(id, coordinates) {
   var newPostKey = db.ref().child('listings').push().key;
   var updates = {};
   updates['/listings/' + newPostKey] = coordinates;

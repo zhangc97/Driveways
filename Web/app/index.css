@@ -8,8 +8,38 @@ body {
   height:100%;
   width:100%;
 }
-.title {
-  margin-right: 20px;
+.geocoder-form {
+  display:flex;
+  flex-direction: row;
+  width: 50%;
+}
+.location-input{
+  padding:1.5%;
+  display:block;
+  border:none;
+  border-bottom:1px solid #ccc;
+  width:100%;
+}
+.go-btn {
+  padding: 1%;
+  margin-left: 1%;
+  width: 7%;
+}
+.pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+    background-image: none !important;
+    height: 0px;
+    padding: 0;
+    margin: 0;
+}
+.geocoder-style-container {
+  position: absolute;
+  width: 75vw;
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
 }
 .login-modal{
   position: 'absolute';
@@ -22,9 +52,10 @@ body {
 .home-container {
   flex-direction: row;
   display:flex;
-  height: 92%;
+  height: 93%;
 
 }
+
 .sign-in-container {
   display:flex;
   flex-direction: column;
@@ -37,10 +68,40 @@ body {
   align-items:center;
 
 }
+.results-container{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+}
 
+.items-list {
+  flex: 1 0 auto;
+	list-style-type: none;
+	padding: 5px 0px 5px;
+  width:25vw;
+
+}
+.info-container li {
+  display: flex;
+	padding: 0 20px;
+	min-height: 50px;
+}
+.info-container li:nth-child(2n) {
+	background-color: #f2f2f2;
+}
+.info-container li p {
+	flex: 0 0 25%;
+}
 .info-container{
   padding: 3px;
-  width: 30%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  border:1px solid black;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
 }
 
 .avatar-img {

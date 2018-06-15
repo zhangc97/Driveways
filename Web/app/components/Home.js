@@ -4,15 +4,14 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose'
 import withAuthorization from '../utils/withAuthorization';
 import ResultSection from './ListingResults'
+import Map from './Map1';
 
 class Home extends React.Component {
   render() {
     return(
       <div className = 'home-container'>
-          <MapDisplay />
-        <div className = 'info-container'>
-          <ResultSection />
-        </div>
+          <Map />
+
       </div>
     )
   }
