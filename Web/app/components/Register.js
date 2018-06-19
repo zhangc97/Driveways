@@ -1,8 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 import SignUp from './Signup';
-
-
+import { Link, withRouter} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +14,9 @@ class Register extends React.Component {
     Modal.setAppElement('body')
   }
   toggleModal = event => {
-    console.log(event);
+    if(this.state.isOpen){
+      this.props.history.push('/')
+    }
     const { isOpen } = this.state;
     this.setState({ isOpen: !isOpen });
   }
@@ -22,11 +24,37 @@ class Register extends React.Component {
     const {isOpen} = this.state
     return (
       <div className = 'login-modal'>
-        <button className = '' onClick = {this.toggleModal}>Register</button>
+        <Link className = 'nav-btn' onClick = {this.toggleModal} to = '/register'>Register</Link>
         <Modal
-          style={{overlay: {zIndex: 1000},
-                  display: 'flex',
-                  flexdirection: 'column'}}
+          style={{
+            overlay: {
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: '#0000007d',
+              zIndex: 5,
+            },
+            content: {
+              position: 'absolute',
+              top: '12.5%',
+              left: '33%',
+              right: '40px',
+              bottom: '40px',
+              border: '1px solid #ccc',
+              background: '#fffefe',
+              overflow: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              borderRadius: '4px',
+              outline: 'none',
+              padding: '20px',
+              width: '30%',
+              height: '50%',
+
+
+            }
+          }}
           id = "modal_with_forms"
           isOpen = {isOpen}
           closeTimeoutMS = {150}
@@ -37,7 +65,8 @@ class Register extends React.Component {
             labelledby: "heading",
             describedby: "fulldescription"
           }}>
-          <SignUp />
+            <Route exact path = '/register' component = {SignUp} />
+
 
 
           </Modal>
@@ -45,4 +74,4 @@ class Register extends React.Component {
     )
   }
 }
-export default Register;
+export default withRouter(Register);

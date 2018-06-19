@@ -6,6 +6,7 @@ import AuthUserContext from '../utils/AuthUserContext';
 import { connect } from 'react-redux';
 import SignOut from './SignOutButton'
 
+
 const Nav = () => (
   <div className = 'nav-bar'>
     <div className = 'title'>
@@ -29,7 +30,6 @@ const NavAuthed = () => (
 const NavNonAuthed = () => (
   <div className = 'account-container'>
     <Credentials />
-    <Register />
   </div>
 )
 

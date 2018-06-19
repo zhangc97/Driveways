@@ -1,10 +1,9 @@
 import React from 'react'
-import MapDisplay from './Map'
 import { connect } from 'react-redux';
 import { compose } from 'recompose'
 import withAuthorization from '../utils/withAuthorization';
 import ResultSection from './ListingResults'
-import Map from './Map1';
+import Map from './Map';
 
 class Home extends React.Component {
   render() {

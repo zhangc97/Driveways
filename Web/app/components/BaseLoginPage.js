@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import AuthUserContext from '../utils/AuthUserContext';
 import * as routes from '../constants/routes';
 import {auth} from '../firebase';
+import {PasswordForgetLink} from './PasswordForget'
+import {PasswordChangeLink} from './PasswordChange'
 
 const SignInPage = ( {history} ) => (
-  <div>
+  <div className = 'input-container'>
     <h1>SignIn</h1>
     <SignInForm history = {history} />
   </div>
@@ -63,16 +65,22 @@ class SignInForm extends React.Component {
             onChange = {event => this.setState(byPropKey('email', event.target.value))}
             type = 'text'
             placeholder = 'Email Address'
+            className = 'input-style'
           />
           <input
             value = {password}
             onChange = {event => this.setState(byPropKey('password', event.target.value))}
             type = 'password'
             placeholder = 'Password'
+            className = 'input-style'
           />
-          <button disabled = {isInvalid} type = 'submit'>
+          <button disabled = {isInvalid} type = 'submit' className = 'btn'>
             Sign In
           </button>
+          <div>
+            <PasswordChangeLink />
+            <PasswordForgetLink/>
+          </div>
           { error && <p>{error.message}</p>}
         </form>
     );

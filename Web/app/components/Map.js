@@ -1,155 +1,169 @@
-//Mapbox key : pk.eyJ1IjoiemhhbmdjMTYiLCJhIjoiY2pocXQ4YWpuNGhyNzNkbmd4bmp0NXI3biJ9.YtbhiD-q1KoaRK4uf-9Q6w
-import React from 'react'
-import mapboxgl from 'mapbox-gl'
-import MapboxGeocoder from 'mapbox-gl-geocoder'
+import React, {Component} from 'react';
+import Map, {Marker, GoogleApiWrapper} from 'google-maps-react';
 import { db } from '../firebase'
-import icon from './images/stock.png'
-import LocationProfile from '../utils/LocationProfile'
 import ResultSection from './ListingResults'
-//Park Whiz Api key: 4d67353220071845681dada0140330c14df5b394
+import $ from 'jquery'
+
+//AIzaSyAcTBusDrvdVgj-PGIqcvhNwBwhjZqwG-k google api
 export const withinRange = (searched, database) => (
     (Math.abs(searched[0] - database[0]) <= 0.2 &&
     Math.abs(searched[1] - database[1]) <= 0.2)
 )
+
+
 var displaycoords = [];
-var mapui;
-
-function geoJsonArray(coords){
-  var arrayGeoJson = []
-
-  coords.map(function(data){
-    var myGeoJson = {};
-    myGeoJson.type = "Feature"
-    myGeoJson.geometry = {
-      "type": "Point",
-      "coordinates": data,
-    }
-    myGeoJson.properties = {
-      "description": "123",
-    }
-    arrayGeoJson.push(myGeoJson)
-  })
-
-  return (
-    arrayGeoJson
-  )
-}
-
-class MapDisplay extends React.Component {
-  constructor(props) {
+var withinRangeResults =[];
+class Contents extends Component {
+  constructor(props){
     super(props);
     this.state = {
-      dbResults: [],
+      position: null,
       loading: true,
-      withinRangeResults: []
+      zoom: 15
     }
+
+
   }
+
 
 
   componentWillMount() {
     db.onceGetCoords().then(snapshot =>
-      this.setState(()=> ({ dbResults: snapshot.val(), loading: false}))
+      this.setState(()=> ({ dbResults: snapshot.val()}))
       //console.log(snapshot.val())
     );
 
-
   }
-  componentWillUnmount() {
-    this.map.remove();
+
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps.map) this.renderAutoComplete();
   }
-  componentDidMount() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiemhhbmdjMTYiLCJhIjoiY2pocXQ4YWpuNGhyNzNkbmd4bmp0NXI3biJ9.YtbhiD-q1KoaRK4uf-9Q6w';
-     this.map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v9'
+
+  onSubmit(e) {
+    e.preventDefault();
+  }
+  markerClick(e) {
+    console.log('clicked');
+  }
+
+  renderAutoComplete() {
+
+    const { google, map } = this.props;
+    if (!google || !map) return;
+
+    const autocomplete = new google.maps.places.Autocomplete(this.autocomplete);
+    google.maps.event.addListener(map,'bounds_changed', function() {
+      autocomplete.bindTo('bounds', map);
     });
-    this.map.loadImage(icon, function( error, image){
-      //if (error) throw error;
-      this.map.addImage('resultIcon', image);
+    //autocomplete.bindTo();
 
-    }.bind(this))
-    var geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-    });
-    var object = this.refs.geocoder;
-    object.appendChild(geocoder.onAdd(this.map));
+    autocomplete.addListener('place_changed', () => {
+      $(".pac-container").remove();
+      const place = autocomplete.getPlace();
+      var markerPosition = [];
+      //console.log(map.getBounds());
+      if (!place.geometry) return;
 
+      if (place.geometry.viewport) {
+        //console.log(place.geometry.viewport);
 
-    geocoder.on('result', function(ev) {
-      this.setState({
-        childcoords: [ev.result.center],
-      })
-      this.map.getLayer(function(layer){
-        this.map.removeLayer(layer);
-      }.bind(this))
-      Object.keys(this.state.dbResults).map(function(data) {
-        if(withinRange(ev.result.center, this.state.dbResults[data].center) === true ){
-          displaycoords.push(this.state.dbResults[data].center);
-          this.setState({
-            withinRangeResults: [...this.state.withinRangeResults, this.state.dbResults[data]],
-          })
-          this.state.dbResults[data].IdKey = data;
+        map.fitBounds(place.geometry.viewport);
+        map.setCenter(place.geometry.location);
+      } else {
+        map.setCenter(place.geometry.location);
+
+      }
+    //  var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
+      const request = {
+        location: place.geometry.location,
+        radius: 3000,
+        type: ['parking']
+      }
+      const callback = (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          results.map((data) => (
+            markerPosition.push(data)
+          ))
         }
+        this.setState({loading: false, zoom: 16})
+      }
+      const service = new google.maps.places.PlacesService(map);
+      //console.log(service.nearbySearch(request, callback)) //error because map has not loaded yet, typical, need to fix
+      //add a api call here for Places closes to place.geometry.location
+      service.nearbySearch(request, callback)
 
-      }.bind(this));
-      //add Map layer here and done
-      //LocationProfile.setLocation(ev.result.center);
-      //need to add state and diff id for layer
-      this.map.addLayer({
-         "id": "points",
-         "type": "circle",
-         "source": {
-             "type": "geojson",
-             "data": {
-                 "type": "FeatureCollection",
-                 "features": geoJsonArray(displaycoords)
-             }
-         },
-         "paint": {
-             "circle-radius" : 10,
-             "circle-color": "#007cbf"
-         }
-     });
-     //console.log(displaycoords);
-   }.bind(this))
+
+      this.props.map.setCenter(place.geometry.location);
+      this.setState({ position: place.geometry.location, markerPos: markerPosition });
+    });
+
+
   }
-
-
-
+//<Marker position = {data.geometry.location} key = {data.geometry.reference}/>
   render() {
-    const style = {
-      height: "100%",
-      width: "75%",
-    };
-    const geocoderStyle = {
-        position: 'absolute',
-        width: '50%',
-        padding: '1%',
-        zIndex: '5',
+    //position.lat() to get latitude
 
-    };
-
-    const mapstyle = {
-      flexdirection: 'row',
-      display:'flex',
-      width: '100%'
-    };
-    //send via state boolean to refresh
-
-    //document.getElementById('geocoder').appendChild(geocoder.onAdd(this.map));
+    if(this.state.position === null && this.props.map) {
+      navigator.geolocation.getCurrentPosition(function(result) {
+          this.props.map.setCenter(new google.maps.LatLng(result.coords.latitude, result.coords.longitude))
+      }.bind(this))
+    } else if(this.state.loading === false ){
+      this.props.map.setCenter(this.state.position)
+    }
+    const { position, loading,  markerPos, zoom } = this.state;
+    withinRangeResults = markerPos
+    //console.log(this.state);
     return (
-      <div style = {mapstyle} >
-        <div style = {style} ref = {el => this.mapContainer = el} >
-          <div ref = 'geocoder' style = {geocoderStyle} />
+      <div className = 'map'>
+        <div className = 'geocoder-style-container' >
+          <form onSubmit={this.onSubmit} className = "geocoder-form" >
+            <input
+              placeholder="Enter a Location"
+              ref={ref => (this.autocomplete = ref)}
+              type="text"
+              className = 'location-input'
+            />
+
+          <input  type="submit" value="Go" className = 'go-btn' />
+          </form>
+        </div>
+
+        <div >
+          <Map
+            {...this.props}
+            zoom = {zoom}
+            mapTypeControl = {false}
+            fullscreenControl = {false}
+            center={position}
+            centerAroundCurrentLocation={true}
+            containerStyle={{
+              height: '93vh',
+              position: 'relative',
+              width: '75vw'
+            }}>
+            <Marker position={position} onClick = {this.markerClick} />
+            {(!this.state.loading)
+              ? markerPos.map((data, index) => (
+                  <Marker position = {data.geometry.location} key = {index} />
+              )): null}
+          </Map>
         </div>
         <div className = 'info-container'>
-          <ResultSection results = {this.state.withinRangeResults} />
+          <ResultSection result = {withinRangeResults} />
         </div>
       </div>
-
-
-    )
+    );
   }
 }
 
-export default MapDisplay;
+
+
+const MapWrapper = props => (
+  <Map className="map" google={props.google} visible={false} >
+    <Contents {...props}  />
+  </Map>
+);
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyCL7GLKUCWcApbK_5-j3Ry9rMRGVspVA2s',
+})(MapWrapper)
