@@ -1,0 +1,271 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font:15px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+h1 {
+  padding: 2%;
+}
+.input-style {
+  border: 0;
+  padding: 15px;
+  margin: 2%;
+  border: 1px solid #ccc;
+  position: relative;
+  background:transparent;
+  background-color: #ffffff;
+  width: 80%;
+}
+.input-style:focus {
+  transition: 0.5s;
+  background-color: #ededed;
+  outline: 0;
+}
+.parking-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-container, #app {
+  height:100%;
+  width:100%;
+}
+.geocoder-form {
+  display:flex;
+  flex-direction: row;
+  width: 50%;
+  font-size: 20px;
+}
+.location-input{
+  padding:1.5%;
+  display:block;
+  border:none;
+  border-bottom:1px solid #ccc;
+  width:100%;
+}
+.btn {
+  margin-top: 10%;
+  width: 40%;
+  height: 35px;
+  border: 2px solid #999;
+  background-color: #ffffff;
+}
+.go-btn {
+  padding: 1%;
+  margin-left: 1%;
+  width: 7%;
+}
+.pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+    background-image: none !important;
+    height: 0px;
+    padding: 0;
+    margin: 0;
+}
+.pac-matched {
+  font-size: 20px;
+  font-weight: 0;
+}
+span {
+  font-size: 20px;
+  font-weight: 0;
+}
+.pac-item {
+  font-size: 20px;
+  font-weight: 0;
+  color: #444;
+  font: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  padding: 2%;
+}
+.pac-item-query {
+  font-size: 20px;
+  font-weight: 0;
+  color:inherit;
+}
+.pac-container {
+  font-size: 20px;
+  font-weight: 0;
+}
+.ReactModal__Body--open {
+  display:flex;
+  flex-direction: column;
+}
+.geocoder-style-container {
+  position: absolute;
+  width: 75vw;
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+.geocoder-form-input {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+.geocoder-style-container-input {
+  width: 75vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 2%;
+
+}
+.login-modal{
+  width:50%;
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+}
+.data-entry-modal-container {
+  align-items: center;
+}
+.account-container {
+  display:flex;
+  flex-direction: row;
+  width: 20vw;
+  justify-content: center;
+  background:#a7f3a6;
+}
+.home-container {
+  flex-direction: row;
+  display:flex;
+  height: 93%;
+
+}
+
+
+.sign-in-container {
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+.mapboxgl-ctrl-geocoder { min-width:100%; }
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+
+}
+
+.input-map {
+  justify-content: center;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  left: 5%;
+
+}
+.nav-bar-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+.items-list {
+  flex: 1 0 auto;
+	list-style-type: none;
+	padding: 5px 0px 5px;
+  width:25vw;
+
+}
+.info-container li {
+  display: flex;
+	padding: 0 20px;
+	min-height: 50px;
+}
+.info-container li:nth-child(2n) {
+	background-color: #f2f2f2;
+}
+.info-container li p {
+	flex: 0 0 25%;
+}
+.map {
+  display:flex;
+  flex-direction: row;
+  width: 100%;
+}
+.input-container {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+}
+.info-container{
+  padding: 3px;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  border:0.5px solid lightgray;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  height: 93%;
+  position: relative;
+  z-index: 1000;
+}
+
+.avatar-img {
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+}
+.nav-btn {
+
+  border: 0.5px solid #9990;
+  font-size: 100%; /*a7f3a6*/
+  color: #000000b3;
+  display:inline-block;
+  outline: none;
+  background:#a7f3a6;
+
+}
+.nav-btn:hover{
+  transition: all 0.1s ease;
+  transform: translatey(-4px);
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  background: #f9f7f3;
+}
+
+.nav-bar {
+  height: 7%;
+  background:#a7f3a6;
+  align-items: center;
+  color:#fff;
+  padding: 5px;
+  display:flex;;
+  justify-content:space-between;
+  flex: 1 0 10px;
+  box-shadow: 0px 0px 50px #0000002b;
+  z-index: 1020;
+  position: relative;
+}
+
+.footer-bar {
+  background: #666784;
+  flex-direction: column;
+  display:flex;
+  color:#fff;
+  padding: 5px;
+  display:flex;
+  height: 15%;
+  justify-content:space-between;
+  flex: 1 0 10px;
+  text-align: center;
+}
